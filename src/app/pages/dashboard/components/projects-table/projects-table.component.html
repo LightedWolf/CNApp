@@ -1,0 +1,32 @@
+<div class="lg:h-48 rounded-lg bg-white">
+  <div class="min-w-full  text-nexus-850 px-4 py-2">
+    <h1 class="font-semibold">Projects</h1>
+    <h2 class="font-medium text-nexus-500">? Completed this Month</h2>
+  </div>
+
+  <div class=" relative max-h-36 overflow-y-auto">
+    <table class="rounded-lg min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+      <thead class="text-left sticky top-0 bg-white">
+        <tr>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Members</th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Budget</th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Progress</th>
+        </tr>
+      </thead>
+
+      <tbody class=" divide-y divide-gray-200 ">
+        @for (project of projects; track $index) {
+        <tr class="odd:bg-gray-50">
+          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{project.name}}</td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{project.asignedUsers}}</td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{project.budget}}</td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{project.state}}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

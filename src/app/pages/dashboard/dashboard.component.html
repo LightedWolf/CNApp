@@ -1,0 +1,11 @@
+<section class="relative flex h-screen flex-wrap lg:h-screen  bricolage-grotesque bg-dashboard-200">
+  <div class="relative hidden lg:flex lg:w-1/5 2xl:w-1/5 lg:px-5 lg:h-full lg:py-5">
+    <app-sidebar-menu [user]="user" class="w-full" />
+  </div>
+  <div class="relative lg:pt-5 lg:w-4/5 lg:pr-5 lg:h-full">
+    <app-navbar [user]="user" />
+    <div class="relative lg:py-5 lg:w-full">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>
