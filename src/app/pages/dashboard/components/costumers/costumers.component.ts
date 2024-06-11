@@ -60,7 +60,6 @@ export class CostumersComponent implements OnInit {
       console.error(error);
     }
   }
-
   async getACostumer(email: string) {
     try {
       this.costumerService.getACostumer(email).subscribe((response) => {

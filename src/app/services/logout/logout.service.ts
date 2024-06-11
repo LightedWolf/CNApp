@@ -9,8 +9,7 @@ export class LogoutService {
   constructor(public router: Router, private cookies: CookieService) {}
 
   logout() {
-    this.cookies.delete('token');
-    this.cookies.delete('id');
+    this.cookies.deleteAll();
     this.router.navigateByUrl('/login');
   }
 }

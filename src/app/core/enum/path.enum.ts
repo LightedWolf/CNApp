@@ -6,5 +6,5 @@ export enum PATH {
   COSTUMERS = 'costumers',
   DETAILS = 'details',
   COLABORATORS = 'colaborators',
-  PROYECTS = 'proyects',
+  PROJECTS = 'projects',
 }

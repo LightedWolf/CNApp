@@ -1,11 +1,15 @@
-<div class="lg:h-48 rounded-lg bg-white">
-  <div class="min-w-full  text-nexus-850 px-4 py-2">
-    <h1 class="font-semibold">Projects</h1>
-    <h2 class="font-medium text-nexus-500">? Completed this Month</h2>
+<div class="{{containerSize}} rounded-lg bg-white">
+  <div class="{{classTitle}}">
+    <h1 class=" font-semibold">Projects</h1>
+    <a (click)="open(createProject)" *ngIf="route"
+      class="cursor-pointer flex gap-2 items-center rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
+      <box-icon color="white" type='icon' name='plus' size="sm"></box-icon>Add New </a>
+
+    <h2 *ngIf="!route" class="block font-medium text-nexus-500">? Completed this Month</h2>
   </div>
 
-  <div class=" relative max-h-36 overflow-y-auto">
-    <table class="rounded-lg min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+  <div class="rounded-lg relative {{tableSize}} overflow-y-auto ">
+    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
       <thead class="text-left sticky top-0 bg-white">
         <tr>
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
@@ -18,7 +22,9 @@
       <tbody class=" divide-y divide-gray-200 ">
         @for (project of projects; track $index) {
         <tr class="odd:bg-gray-50">
-          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{project.name}}</td>
+          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"> <a class="cursor-pointer"
+              (click)="getAProject(project._id)" (click)="open(editDialog)">
+              {{project.name}}</a></td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{project.asignedUsers}}</td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{project.budget}}</td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{project.state}}</td>
@@ -30,3 +36,111 @@
 
 
 </div>
+
+<dialog #createProject class="rounded-lg">
+  <h1 class="font-semibold min-w-full text-center text-lg text-nexus-850 px-4 lg:pt-8">Add Costumer</h1>
+  <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-10">
+    <form class="space-y-4">
+      <div>
+        <label class="sr-only" for="name">Name</label>
+        <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Name" type="text" id="name"
+          name="name" [(ngModel)]="project.name" />
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label class="sr-only" for="members">Members</label>
+          <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="members" type="text" id="members"
+            name="members" [(ngModel)]="project.asignedUsers" />
+        </div>
+
+        <div>
+          <label class="sr-only" for="budget">Budget</label>
+          <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Budget" type="number" id="budget"
+            name="budget" [(ngModel)]="project.budget" />
+        </div>
+      </div>
+      <div>
+        <label class="sr-only" for="state">State</label>
+        <select class="w-full rounded-lg border-gray-200 p-3 text-sm" type="text" id="state" name="state"
+          [(ngModel)]="project.costumer">
+          <option disabled selected>-Choose a option-</option>
+          <option value="66679c7bca2817347468e170">FlexDesk</option>
+          <option value="CN">Offered</option>
+          <option value="TalentoTech">Acepted</option>
+          <option value="finished">Finished</option>
+        </select>
+      </div>
+      <div>
+        <label class="sr-only" for="state">State</label>
+        <select class="w-full rounded-lg border-gray-200 p-3 text-sm" type="text" id="state" name="state"
+          [(ngModel)]="project.state">
+          <option disabled selected>-Choose a option-</option>
+          <option value="Planned">Planned</option>
+          <option value="Offered">Offered</option>
+          <option value="Acepted">Acepted</option>
+          <option value="Finished">Finished</option>
+        </select>
+      </div>
+
+
+      <div class="mt-4 w-full">
+        <button type="submit" (click)="setProject()" (click)="close(createProject)"
+          class="inline-block w-full rounded-lg bg-green-600 px-5 py-3 font-medium text-white ">
+          Save
+        </button>
+      </div>
+    </form>
+    <button class="inline-block mt-2 w-full rounded-lg bg-red-600 px-5 py-3 font-medium text-white"
+      (click)="close(createProject)">Cancel</button>
+  </div>
+</dialog>
+
+
+<dialog #editDialog class="rounded-lg">
+  <h1 class="font-semibold min-w-full text-center text-lg text-nexus-850 px-4 lg:pt-8">Edit Project</h1>
+  <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-10">
+    <form class="space-y-4">
+      <div>
+        <label class="sr-only" for="name">Name</label>
+        <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedProject.name}} type="text" id="name"
+          name="name" [(ngModel)]="gettedProject.name" />
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label class="sr-only" for="email">Email</label>
+          <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedProject.asignedUsers}} type="email"
+            id="email" name="email" [(ngModel)]="gettedProject.asignedUsers" />
+        </div>
+
+        <div>
+          <label class="sr-only" for="phone">Phone</label>
+          <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedProject.budget}} type="tel"
+            id="phone" name="phone" [(ngModel)]="gettedProject.budget" />
+        </div>
+      </div>
+
+      <div class="flex mt-4 w-full">
+        <button type="submit" (click)="updateProject()" (click)="close(editDialog)"
+          class=" w-full rounded-lg bg-green-600 mx-2 py-4 font-medium text-white ">
+          Update
+        </button>
+        <button
+          class=" w-full rounded-lg bg-white px-5 py-3 font-medium text-nexus-600 border border-nexus-500 hover:bg-nexus-500 hover:text-white"
+          (click)="close(editDialog)">Cancel</button>
+      </div>
+      <span class="flex items-center">
+        <span class="h-px flex-1 bg-nexus-850"></span>
+        <span class="shrink-0 px-6 text-red-600 font-medium">Or Delete project</span>
+        <span class="h-px flex-1 bg-nexus-850"></span>
+      </span>
+      <div class="mt-4 w-full">
+        <button type="submit" (click)="deleteProject()" (click)="close(editDialog)"
+          class="inline-block w-full rounded-lg bg-red-600 px-5 py-3 font-medium text-white ">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>

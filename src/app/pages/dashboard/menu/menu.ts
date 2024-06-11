@@ -13,8 +13,8 @@ export const MenuRoutes: MenuInfoInterface[] = [
     title: 'Costumers',
     submenu: [
       {
-        path: PATH.PROYECTS,
-        title: 'Proyects',
+        path: PATH.PROJECTS,
+        title: 'Projects',
       },
     ],
   },

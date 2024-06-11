@@ -42,8 +42,8 @@ export const routes: Routes = [
         component: CostumersComponent,
       },
       {
-        path: PATH.PROYECTS,
-        title: 'Proyects',
+        path: PATH.PROJECTS,
+        title: 'Projects',
         component: ProyectsComponent,
       },
     ],

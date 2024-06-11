@@ -3,7 +3,7 @@ import { LoginService } from '../../services/login/login.service';
 import { User } from '../../core/interface/user.interface';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -14,14 +14,22 @@ import { HttpHeaders } from '@angular/common/http';
   imports: [SidebarMenuComponent, NavbarComponent, RouterOutlet],
 })
 export class DashboardComponent {
-  constructor(public loginService: LoginService) {}
+  constructor(public loginService: LoginService, public router: Router) {}
+
+  ngOnInit(): void {
+    const token = this.loginService.getToken();
+    const userId = this.loginService.getId();
+    if (token && userId) {
+      this.router.navigateByUrl('/home/dashboard');
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+    this.getUserLogged();
+  }
   user: User = {
     email: '',
     password: '',
   };
-  ngOnInit(): void {
-    this.getUserLogged();
-  }
   getUserLogged() {
     const id = this.loginService.getId();
     const token = this.loginService.getToken();

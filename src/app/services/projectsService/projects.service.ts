@@ -32,4 +32,24 @@ export class ProjectsService {
       headers,
     });
   }
+  getAProject(id: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get(`http://localhost:4000/api/v1/projects/${id}`, {
+      headers,
+    });
+  }
+  updateAProject(id: string | undefined, projectData: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.put(
+      `http://localhost:4000/api/v1/projects/${id}`,
+      projectData,
+      { headers }
+    );
+  }
+  deleteAProyect(id: string | undefined): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(`http://localhost:4000/api/v1/projects/${id}`, {
+      headers,
+    });
+  }
 }

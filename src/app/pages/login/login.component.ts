@@ -17,6 +17,15 @@ export class LoginComponent {
   password: string = '';
 
   constructor(public loginService: LoginService, public router: Router) {}
+  ngOnInit(): void {
+    const token = this.loginService.getToken();
+    const userId = this.loginService.getId();
+    if (token && userId) {
+      this.router.navigateByUrl('/home/dashboard');
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
   async login() {
     const user = { email: this.email, password: this.password };
     try {
