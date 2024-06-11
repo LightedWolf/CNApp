@@ -44,13 +44,16 @@ export class CostumerService {
       headers,
     });
   }
-  updateACostumer(id: string): Observable<any> {
+  updateACostumer(id: string | undefined, costumerData: any): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.put(`http://localhost:4000/api/v1/costumers/${id}`, {
-      headers,
-    });
+    return this.http.put(
+      `http://localhost:4000/api/v1/costumers/${id}`,
+      costumerData,
+      { headers }
+    );
   }
-  deleteACostumer(id: string): Observable<any> {
+
+  deleteACostumer(id: string | undefined): Observable<any> {
     const headers = this.getHeaders();
     return this.http.delete(`http://localhost:4000/api/v1/costumers/${id}`, {
       headers,

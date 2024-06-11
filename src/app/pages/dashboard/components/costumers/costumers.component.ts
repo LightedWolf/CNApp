@@ -8,6 +8,7 @@ import { CostumerService } from '../../../../services/costumer/costumer.service'
 import { LoginService } from '../../../../services/login/login.service';
 import { Costumer } from '../../../../core/interface/costumer.interface';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-costumers',
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
 export class CostumersComponent implements OnInit {
   constructor(
     public costumerService: CostumerService,
-    public loginService: LoginService
+    public loginService: LoginService,
+    private router: Router
   ) {}
   costumers: Costumer[] = [];
   costumer: Costumer = {
@@ -36,7 +38,6 @@ export class CostumersComponent implements OnInit {
     email: '',
     createdBy: '',
   };
-
   ngOnInit(): void {
     this.getCostumers();
   }
@@ -57,11 +58,35 @@ export class CostumersComponent implements OnInit {
       console.error(error);
     }
   }
+
   async getACostumer(email: string) {
     try {
       this.costumerService.getACostumer(email).subscribe((response) => {
         this.gettedCostumer = response.costumer;
         console.log(this.gettedCostumer);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async updateCostumer() {
+    const id = this.gettedCostumer._id;
+    const costumerData = this.gettedCostumer;
+    try {
+      this.costumerService
+        .updateACostumer(id, costumerData)
+        .subscribe((response) => {
+          console.log('Backend Response: ', response);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async deleteCostumer() {
+    const id = this.gettedCostumer._id;
+    try {
+      this.costumerService.deleteACostumer(id).subscribe((response) => {
+        console.log('Backend Response: ', response);
       });
     } catch (error) {
       console.error(error);
