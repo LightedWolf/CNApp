@@ -1,5 +1,6 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
@@ -22,7 +23,8 @@ export class CostumersComponent implements OnInit {
   constructor(
     public costumerService: CostumerService,
     public loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private changeDetectorREf: ChangeDetectorRef
   ) {}
   costumers: Costumer[] = [];
   costumer: Costumer = {
@@ -78,6 +80,12 @@ export class CostumersComponent implements OnInit {
         .subscribe((response) => {
           console.log('Backend Response: ', response);
         });
+      this.getCostumers();
+      this.router
+        .navigateByUrl('/home', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate(['/home/costumers']);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -88,6 +96,12 @@ export class CostumersComponent implements OnInit {
       this.costumerService.deleteACostumer(id).subscribe((response) => {
         console.log('Backend Response: ', response);
       });
+      this.getCostumers();
+      this.router
+        .navigateByUrl('/home', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate(['/home/costumers']);
+        });
     } catch (error) {
       console.error(error);
     }
