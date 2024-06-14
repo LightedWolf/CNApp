@@ -5,13 +5,20 @@ import { LoginService } from '../../../../services/login/login.service';
 import { ProjectsService } from '../../../../services/projectsService/projects.service';
 import { ProjectsTableComponent } from '../projects-table/projects-table.component';
 import { Project } from '../../../../core/interface/project.interface';
+import { BarchartCardComponent } from '../barchart-card/barchart-card.component';
+import { DonutchartCardComponent } from '../donutchart-card/donutchart-card.component';
 
 @Component({
   selector: 'app-dashboard-child',
   standalone: true,
   templateUrl: './dashboard-child.component.html',
   styleUrl: './dashboard-child.component.css',
-  imports: [FinanceCardComponent, ProjectsTableComponent],
+  imports: [
+    FinanceCardComponent,
+    ProjectsTableComponent,
+    BarchartCardComponent,
+    DonutchartCardComponent,
+  ],
 })
 export class DashboardChildComponent implements OnInit {
   constructor(
@@ -19,6 +26,7 @@ export class DashboardChildComponent implements OnInit {
     public loginService: LoginService,
     public projectService: ProjectsService
   ) {}
+  monthlySales = [];
   monthlySummary = {
     income: 0,
     expenses: 0,

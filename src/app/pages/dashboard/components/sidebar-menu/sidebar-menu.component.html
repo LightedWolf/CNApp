@@ -1,18 +1,19 @@
 <div class="flex h-screen flex-col lg:min-w-full justify-between border-e lg:h-full lg:rounded-xl bg-white">
   <div class="px-5 py-6">
-    <div class="relative flex justify-center items-center h-36 py-2 w-full lg:py-2 sm:h-2 lg:h-20 lg:w-full lg:px-4">
+    <div
+      class="relative flex justify-center items-center h-36 py-2 w-full lg:py-2 2xl:py-1 sm:h-2 lg:h-20 2xl:h-24 lg:w-full lg:px-4">
       <object class="h-full lg:h-full" data="../../../assets/1_8b30186c-a4e4-4565-a472-78f9b43f2707- 1.svg"></object>
-      <h1 class="text-2xl lg:text-xl lg:px-2 font-bold ">CN CRM</h1>
+      <h1 class="text-2xl lg:text-xl 2xl:text-2xl lg:px-2 2xl:mx-4 2xl:px-0 font-bold ">Costumer<br>Nexus</h1>
     </div>
 
-    <ul class="mt-6 space-y-1">
+    <ul class="lg:mt-6 2xl:mt-7 lg:space-y-1 2xl:space-y-3">
       @for (item of menuItems; track $index) {
       @if (!item.submenu) {
       <li class="">
         <!-- TODO: lograr escape de las comillas  -->
         <!-- <box-icon type='icon' name='{{item.icon}}' size="md"></box-icon> -->
         <a routerLink={{item.path}}
-          class="block rounded-lg  px-4 py-2 text-sm font-medium text-gray-500 hover:bg-nexus-500 hover:text-white">
+          class="block rounded-lg lg:px-4 2xl:px-6 lg:py-2 2xl:py-3 2xl:text-lg lg:text-sm font-medium text-gray-500 hover:bg-nexus-500 hover:text-white">
           {{item.title}}
         </a>
       </li>
@@ -21,8 +22,8 @@
       <li>
         <details class="group [&_summary::-webkit-details-marker]:hidden">
           <summary
-            class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-nexus-500 hover:text-white">
-            <span routerLink={{item.path}} class="text-sm font-medium"> {{item.title}} </span>
+            class="flex cursor-pointer items-center justify-between rounded-lg lg:px-4 2xl:px-6 lg:py-2 2xl:py-3 text-gray-500 hover:bg-nexus-500 hover:text-white">
+            <span routerLink={{item.path}} class="2xl:text-lg lg:text-sm font-medium"> {{item.title}} </span>
 
             <span class="shrink-0 transition duration-300 group-open:-rotate-180">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -37,7 +38,7 @@
             @for (subitem of item.submenu; track $index) {
             <li>
               <a routerLink={{subitem.path}}
-                class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-nexus-500 hover:text-white">
+                class="block rounded-lg lg:px-4 2xl:px-6 lg:py-2 2xl:py-3 2xl:text-lg lg:text-sm font-medium text-gray-500 hover:bg-nexus-500 hover:text-white">
                 {{subitem.title}}
               </a>
             </li>
@@ -53,6 +54,4 @@
     </ul>
   </div>
 
-  <button class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-nexus-500 hover:text-white"
-    (click)="logout()">Logout</button>
 </div>

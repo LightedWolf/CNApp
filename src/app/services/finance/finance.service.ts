@@ -35,6 +35,31 @@ export class FinanceService {
       }
     );
   }
+  getAReport(id: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get(`http://localhost:4000/api/v1/financeReports/${id}`, {
+      headers,
+    });
+  }
+  updateAReport(id: string | undefined, reportData: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.put(
+      `http://localhost:4000/api/v1/financeReports/${id}`,
+      reportData,
+      {
+        headers,
+      }
+    );
+  }
+  deleteAReport(id: string | undefined): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(
+      `http://localhost:4000/api/v1/financeReports/${id}`,
+      {
+        headers,
+      }
+    );
+  }
   getWeekReports(id: string): Observable<any> {
     const headers = this.getHeaders();
     return this.http.get(
@@ -75,6 +100,15 @@ export class FinanceService {
     const headers = this.getHeaders();
     return this.http.get(
       `http://localhost:4000/api/v1/financeReports/week-sales/${id}`,
+      {
+        headers,
+      }
+    );
+  }
+  getMonthlySales(id: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get(
+      `http://localhost:4000/api/v1/financeReports/monthly-sales/${id}`,
       {
         headers,
       }

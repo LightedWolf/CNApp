@@ -2,7 +2,7 @@
 
   <div class=" rounded-lg bg-white">
     <div class="flex justify-between items-center min-w-full lg:h-16 text-nexus-850 px-4 py-2">
-      <h1 class="font-semibold">Costumers</h1>
+      <h1 class="font-semibold">Finance Reports</h1>
       <a (click)="open(alertDialog)"
         class="cursor-pointer flex gap-2 items-center rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
         <box-icon color="white" type='icon' name='plus' size="sm"></box-icon>Add New
@@ -12,25 +12,33 @@
       <table class="rounded-lg min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
         <thead class="text-left sticky top-0 bg-white">
           <tr>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">email</th>
-            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">phone</th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Type</th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Value</th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Description</th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date</th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Last Modified</th>
             <th class="whitespace-nowrap text-end px-8 py-2 font-medium text-gray-900">Actions</th>
           </tr>
         </thead>
 
         <tbody class=" divide-y divide-gray-200 ">
-          @for (costumer of costumers; track $index) {
+          @for (report of reports; track $index) {
           <tr class="odd:bg-gray-50">
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{costumer.name}}</td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{costumer.email}}</td>
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{report.type}}</td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{report.value}}</td>
             <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{costumer.phone}}
+              {{report.description}}
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              {{report.date}}
+            </td>
+            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+              {{report.lastUpdated}}
             </td>
             <div class="flex px-4 justify-end">
 
               <span class="inline-flex overflow-hidden right-0 rounded-md border bg-white shadow-sm">
-                <button (click)="getACostumer(costumer.email)" (click)="open(editDialog)"
+                <button (click)="getAReport(report._id!)" (click)="open(editDialog)"
                   class="inline-block border-e p-3 text-gray-700 hover:bg-nexus-300 focus:relative"
                   title="Edit Costumer">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -40,7 +48,7 @@
                   </svg>
                 </button>
 
-                <button (click)="getACostumer(costumer.email)" (click)="open(deleteDialog)"
+                <button (click)="getAReport(report._id!)" (click)="open(deleteDialog)"
                   class="inline-block p-3 text-gray-700 hover:bg-red-400 focus:relative" title="Delete Costumer">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="h-4 w-4">
@@ -57,31 +65,39 @@
     </div>
 
     <dialog #alertDialog class="rounded-lg">
-      <h1 class="font-semibold min-w-full text-center text-lg text-nexus-850 px-4 lg:pt-8">Add Costumer</h1>
+      <h1 class="font-semibold min-w-full text-center text-lg text-nexus-850 px-4 lg:pt-8">New Report</h1>
       <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-10">
         <form class="space-y-4">
           <div>
-            <label class="sr-only" for="name">Name</label>
-            <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Name" type="text" id="name"
-              name="name" [(ngModel)]="costumer.name" />
+            <label for="description">Description</label>
+            <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Insert a description" type="text"
+              id="phone" name="phone" [(ngModel)]="report.description" />
+          </div>
+          <div>
+            <label for="type">Type</label>
+            <select class="w-full rounded-lg border-gray-200 p-3 text-sm" type="text" id="type" name="type"
+              [(ngModel)]="report.type">
+              <option disabled selected>-Choose a option-</option>
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+            </select>
           </div>
 
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label class="sr-only" for="email">Email</label>
-              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Email address" type="email"
-                id="email" name="email" [(ngModel)]="costumer.email" />
+              <label for="value">Value</label>
+              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Insert Value" type="number"
+                id="email" name="email" [(ngModel)]="report.value" />
             </div>
-
             <div>
-              <label class="sr-only" for="phone">Phone</label>
-              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Phone Number" type="tel"
-                id="phone" name="phone" [(ngModel)]="costumer.phone" />
+              <label for="date">Date</label>
+              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" placeholder="Phone Number" type="date"
+                id="phone" name="phone" [(ngModel)]="report.date" />
             </div>
           </div>
 
           <div class="mt-4 w-full">
-            <button type="submit" (click)="setCostumer()" (click)="close(alertDialog)"
+            <button type="submit" (click)="setReport()" (click)="close(alertDialog)"
               class="inline-block w-full rounded-lg bg-green-600 px-5 py-3 font-medium text-white ">
               Save
             </button>
@@ -98,26 +114,26 @@
         <form class="space-y-4">
           <div>
             <label class="sr-only" for="name">Name</label>
-            <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedCostumer.name}} type="text"
-              id="name" name="name" [(ngModel)]="gettedCostumer.name" />
+            <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedReport.type}} type="text"
+              id="name" name="name" [(ngModel)]="gettedReport.type" />
           </div>
 
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label class="sr-only" for="email">Email</label>
-              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedCostumer.email}} type="email"
-                id="email" name="email" [(ngModel)]="gettedCostumer.email" />
+              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedReport.value}} type="email"
+                id="email" name="email" [(ngModel)]="gettedReport.value" />
             </div>
 
             <div>
               <label class="sr-only" for="phone">Phone</label>
-              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedCostumer.phone}} type="tel"
-                id="phone" name="phone" [(ngModel)]="gettedCostumer.phone" />
+              <input class="w-full rounded-lg border-gray-200 p-3 text-sm" value={{gettedReport.description}} type="tel"
+                id="phone" name="phone" [(ngModel)]="gettedReport.description" />
             </div>
           </div>
 
           <div class="flex mt-4 w-full">
-            <button type="submit" (click)="updateCostumer()" (click)="close(editDialog)"
+            <button type="submit" (click)="updateReports()" (click)="close(editDialog)"
               class=" w-full rounded-lg bg-green-600 mx-2 py-4 font-medium text-white ">
               Update
             </button>
@@ -129,15 +145,15 @@
     </dialog>
 
     <dialog #deleteDialog class="rounded-lg">
-      <h1 class="font-semibold min-w-full text-center text-lg text-nexus-850 px-4 lg:pt-8">Delete Costumer</h1>
+      <h1 class="font-semibold min-w-full text-center text-lg text-nexus-850 px-4 lg:pt-8">Delete Report</h1>
       <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-10">
         <form class="space-y-4">
           <div>
-            <h1>Estas seguro de eliminar el cliente: <strong>{{gettedCostumer.name}}</strong>?</h1>
+            <h1>Estas seguro de eliminar el reporte: <strong>{{gettedReport.description}}</strong>?</h1>
           </div>
 
           <div class="mt-4 w-full">
-            <button type="submit" (click)="deleteCostumer()" (click)="close(deleteDialog)"
+            <button type="submit" (click)="deleteReport()" (click)="close(deleteDialog)"
               class="inline-block w-full rounded-lg bg-red-600 px-5 py-3 font-medium text-white ">
               Delete
             </button>

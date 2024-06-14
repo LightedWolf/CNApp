@@ -1,11 +1,12 @@
 export interface FinanceReport {
+  _id?: string;
   costumer?: string;
   description: string;
   type: string;
   currency: string;
   value: number;
   createdBy: string;
-  date: Date;
+  date: Date | undefined;
   project: string;
-  lastUpdated: Date;
+  lastUpdated: Date | undefined;
 }

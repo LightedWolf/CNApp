@@ -43,7 +43,12 @@ export class ProyectsComponent implements OnInit {
 
     try {
       this.projectService.createproject(this.project);
-      this.projects.push(this.project);
+      this.getProjects();
+      this.router
+        .navigateByUrl('/home', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate(['/home/projects']);
+        });
     } catch (error) {
       console.error(error);
     }

@@ -1,10 +1,4 @@
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { CostumerService } from '../../../../services/costumer/costumer.service';
 import { LoginService } from '../../../../services/login/login.service';
 import { Costumer } from '../../../../core/interface/costumer.interface';
@@ -23,8 +17,7 @@ export class CostumersComponent implements OnInit {
   constructor(
     public costumerService: CostumerService,
     public loginService: LoginService,
-    private router: Router,
-    private changeDetectorREf: ChangeDetectorRef
+    private router: Router
   ) {}
   costumers: Costumer[] = [];
   costumer: Costumer = {

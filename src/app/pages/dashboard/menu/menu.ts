@@ -19,8 +19,14 @@ export const MenuRoutes: MenuInfoInterface[] = [
     ],
   },
   {
-    path: PATH.SALES,
-    title: 'Sales',
+    path: PATH.FINANCE,
+    title: 'Finance',
+    submenu: [
+      {
+        path: PATH.REPORTS,
+        title: 'Reports',
+      },
+    ],
   },
   {
     path: PATH.TEAMS,

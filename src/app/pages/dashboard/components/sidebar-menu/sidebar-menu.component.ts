@@ -25,10 +25,6 @@ export class SidebarMenuComponent implements OnInit {
     email: '',
     password: '',
   };
-  constructor(public logoutService: LogoutService) {}
-  logout() {
-    this.logoutService.logout();
-  }
 
   ngOnInit(): void {
     this.menuItems = MenuRoutes;
