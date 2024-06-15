@@ -1,23 +1,23 @@
 <div class="lg:w-full lg:h-full">
 
-  <div class="lg:h-44 grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
+  <div class="2xl:h-80 lg:h-44 grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
     <app-barchart-card></app-barchart-card>
     <app-donutchart-card></app-donutchart-card>
   </div>
-  <div class="lg:h-28 mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 ">
-    <app-finance-card bgcolor="bg-gradient-to-b from-green-200 to-green-50"
-      imgsrc="../../../../../assets/dollar-circle-regular-60 1.svg" title="Ingresos"
+  <div class="2xl:h-40 lg:h-28 2xl:mt-5 lg:mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3 2xl:gap-10 lg:gap-8 ">
+    <app-finance-card bgcolor="bg-gradient-to-b from-green-200 to-green-50" textoptions="text-green-500 font-semibold"
+      imgsrc="../../../../../assets/dollar-circle-regular-60 1.svg" title="Income"
       [value]="monthlySummary.income"></app-finance-card>
-    <app-finance-card bgcolor="bg-gradient-to-b from-rose-300 to-rose-50"
-      imgsrc="../../../../../assets/money-regular-60 1.svg" title="Gastos"
+    <app-finance-card bgcolor="bg-gradient-to-b from-rose-300 to-rose-50" textoptions="text-rose-500 font-semibold"
+      imgsrc="../../../../../assets/money-regular-60 1.svg" title="Expense"
       [value]="monthlySummary.expenses"></app-finance-card>
-    <app-finance-card bgcolor="bg-gradient-to-b from-sky-300 to-sky-50"
-      imgsrc="../../../../../assets/wallet-regular-60 1.svg" title="Saldo"
+    <app-finance-card bgcolor="bg-gradient-to-b from-sky-300 to-sky-50" textoptions="text-sky-600 font-semibold"
+      imgsrc="../../../../../assets/wallet-regular-60 1.svg" title="Balance"
       [value]="monthlySummary.monthlyBalance"></app-finance-card>
   </div>
-  <div class="lg:h-48 mt-4 ">
-    <app-projects-table containerSize="lg:h-48" tableSize="max-h-32" classTitle="min-w-full  text-nexus-850 px-4 py-2"
-      [projects]="projects" />
+  <div class="2xl:h-[18rem] lg:h-48 2xl:mt-5 lg:mt-4 ">
+    <app-projects-table containerSize="2xl:h-[18rem] lg:h-48" tableSize="2xl:max-h-44 lg:max-h-32"
+      classTitle="min-w-full text-nexus-850 px-4 py-2" [projects]="projects" />
   </div>
 
 

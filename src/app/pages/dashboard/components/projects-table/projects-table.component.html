@@ -1,15 +1,15 @@
 <div class="{{containerSize}} rounded-lg bg-white">
   <div class="{{classTitle}}">
-    <h1 class=" font-semibold">Projects</h1>
+    <h1 class="2xl:text-xl font-semibold">Projects</h1>
     <a (click)="open(createProject)" *ngIf="route"
       class="cursor-pointer flex gap-2 items-center rounded bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
       <box-icon color="white" type='icon' name='plus' size="sm"></box-icon>Add New </a>
 
-    <h2 *ngIf="!route" class="block font-medium text-nexus-500">? Completed this Month</h2>
+    <h2 *ngIf="!route" class="block 2xl:text-lg font-medium text-nexus-500">? Completed this Month</h2>
   </div>
 
   <div class="rounded-lg relative {{tableSize}} overflow-y-auto ">
-    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+    <table class="min-w-full divide-y-2 divide-gray-200 bg-white 2xl:text-base lg:text-sm">
       <thead class="text-left sticky top-0 bg-white">
         <tr>
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>

@@ -91,7 +91,25 @@ export class DonutchartCardComponent {
       },
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 1535,
+          options: {
+            chart: {
+              parentHeightOffset: 0,
+              height: 160,
+            },
+          },
+        },
+        {
+          breakpoint: 1281,
+          options: {
+            chart: {
+              parentHeightOffset: 0,
+              height: 200,
+            },
+          },
+        },
+        {
+          breakpoint: 450,
           options: {
             chart: {
               height: 200,

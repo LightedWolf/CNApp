@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { Costumer } from '../../core/interface/costumer.interface';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CostumerService {
   constructor(private http: HttpClient, private loginService: LoginService) {}
-
+  apiURL: string = environment.API_URL;
   private getHeaders(): HttpHeaders {
     const token = this.loginService.getToken();
     return new HttpHeaders({
@@ -20,7 +21,7 @@ export class CostumerService {
   createCostumer(costumer: Costumer) {
     const headers = this.getHeaders();
     this.http
-      .post('http://localhost:4000/api/v1/costumers', costumer, {
+      .post(`${this.apiURL}/api/v1/costumers`, costumer, {
         headers,
       })
       .subscribe(
@@ -34,20 +35,20 @@ export class CostumerService {
   }
   getAllCostumers(id: string): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get(`http://localhost:4000/api/v1/costumers/all/${id}`, {
+    return this.http.get(`${this.apiURL}/api/v1/costumers/all/${id}`, {
       headers,
     });
   }
   getACostumer(email: string): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get(`http://localhost:4000/api/v1/costumers/${email}`, {
+    return this.http.get(`${this.apiURL}/api/v1/costumers/${email}`, {
       headers,
     });
   }
   updateACostumer(id: string | undefined, costumerData: any): Observable<any> {
     const headers = this.getHeaders();
     return this.http.put(
-      `http://localhost:4000/api/v1/costumers/${id}`,
+      `${this.apiURL}/api/v1/costumers/${id}`,
       costumerData,
       { headers }
     );
@@ -55,7 +56,7 @@ export class CostumerService {
 
   deleteACostumer(id: string | undefined): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.delete(`http://localhost:4000/api/v1/costumers/${id}`, {
+    return this.http.delete(`${this.apiURL}/api/v1/costumers/${id}`, {
       headers,
     });
   }

@@ -1,10 +1,10 @@
-<div class="flex items-center justify-evenly lg:h-28 rounded-lg bg-white">
-  <div class="flex items-center justify-center size-20 rounded-full {{bgcolor}}">
-    <img src={{imgsrc}} alt="">
+<div class="flex items-center justify-evenly 2xl:h-40 lg:h-28 rounded-lg bg-white">
+  <div class="flex items-center justify-center 2xl:size-28 lg:size-20 rounded-full {{bgcolor}}">
+    <img class="2xl:h-[4.5rem]" src={{imgsrc}} alt="">
   </div>
-  <div>
-    <div class="font-medium">{{ title }}</div>
-    <div class="font-bold text-xl">$ {{ value }}</div>
-    <div class="text-xs">en los utlimos 30 dias</div>
+  <div class=>
+    <div class="2xl:text-xl {{textoptions}} font-medium">{{ title }}</div>
+    <div class="font-bold 2xl:text-2xl lg:text-xl">$ {{ value | number: '1.0-0' }}</div>
+    <div class="2xl:text-base lg:text-xs">last 30 Days</div>
   </div>
 </div>

@@ -18,12 +18,22 @@ export class LoginComponent {
 
   constructor(public loginService: LoginService, public router: Router) {}
   ngOnInit(): void {
+    this.server();
     const token = this.loginService.getToken();
     const userId = this.loginService.getId();
     if (token && userId) {
       this.router.navigateByUrl('/home/dashboard');
     } else {
       this.router.navigateByUrl('/login');
+    }
+  }
+  async server() {
+    try {
+      this.loginService.serverInvocate().subscribe((response) => {
+        console.log('Backend Response:', response);
+      });
+    } catch (error) {
+      console.error(error);
     }
   }
   async login() {
@@ -37,5 +47,14 @@ export class LoginComponent {
     } catch (error) {
       console.error(error);
     }
+  }
+  passwordFieldType: string = 'password';
+
+  showPassword() {
+    this.passwordFieldType = 'text';
+  }
+
+  hidePassword() {
+    this.passwordFieldType = 'password';
   }
 }
