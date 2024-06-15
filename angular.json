@@ -33,7 +33,6 @@
           },
           "configurations": {
             "production": {
-              "optimization": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
