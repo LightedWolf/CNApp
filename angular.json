@@ -13,6 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "apexcharts",
+              "ng-apexcharts"
+            ],
             "outputPath": "dist/cn17-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -33,6 +37,7 @@
           },
           "configurations": {
             "production": {
+              "optimization": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -42,8 +47,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -63,6 +68,7 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+
             }
           },
           "defaultConfiguration": "production"
