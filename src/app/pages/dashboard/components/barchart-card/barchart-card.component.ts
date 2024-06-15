@@ -86,6 +86,7 @@ export class BarchartCardComponent implements OnInit {
 
     try {
       this.financeService.getMonthlySales(id).subscribe((response) => {
+        console.log(response.salesBymonth);
         this.chartOptions.series![0].data = response.salesByMonth;
       });
     } catch (error) {
